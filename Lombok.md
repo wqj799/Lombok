@@ -58,7 +58,7 @@ public class GetterSetterExample {
   @Getter
   @Setter 
   private int age = 10;
-  
+
   @Setter(AccessLevel.PROTECTED)
   private String name;
 }
@@ -75,11 +75,11 @@ public class GetterSetterExample {
   public int getAge() {
     return age;
   }
-  
+
   public void setAge(int age) {
     this.age = age;
   }
-  
+
   protected void setName(String name) {
     this.name = name;
   }
@@ -113,15 +113,15 @@ public class ToStringExample {
   private String[] tags;
   @ToString.Exclude
   private int id;
-  
+
   public String getName() {
     return this.name;
   }
-  
+
   @ToString(callSuper=true, includeFieldNames=true)
   public static class Square extends Shape {
     private final int width, height;
-    
+
     public Square(int width, int height) {
       this.width = width;
       this.height = height;
@@ -133,7 +133,6 @@ public class ToStringExample {
 生成的代码：
 
 ```java
-
 import java.util.Arrays;
 
 public class ToStringExample {
@@ -142,25 +141,25 @@ public class ToStringExample {
   private Shape shape = new Square(5, 10);
   private String[] tags;
   private int id;
-  
+
   public String getName() {
     return this.name;
   }
-  
+
   public static class Square extends Shape {
     private final int width, height;
-    
+
     public Square(int width, int height) {
       this.width = width;
       this.height = height;
     }
-    
+
     @Override
     public String toString() {
       return "Square(super=" + super.toString() + ", width=" + this.width + ", height=" + this.height + ")";
     }
   }
-  
+
   @Override
   public String toString() {
     // 没有成员变量id
@@ -192,15 +191,15 @@ public class EqualsAndHashCodeExample {
   private String[] tags;
   @EqualsAndHashCode.Exclude
   private int id;
-  
+
   public String getName() {
     return this.name;
   }
-  
+
   @EqualsAndHashCode(callSuper=true)
   public static class Square extends Shape {
     private final int width, height;
-    
+
     public Square(int width, int height) {
       this.width = width;
       this.height = height;
@@ -221,11 +220,11 @@ public class EqualsAndHashCodeExample {
   private Shape shape = new Square(5, 10);
   private String[] tags;
   private int id;
-  
+
   public String getName() {
     return this.name;
   }
-  
+
   @Override
   public boolean equals(Object o) {
     if (o == this) return true;
@@ -237,7 +236,7 @@ public class EqualsAndHashCodeExample {
     if (!Arrays.deepEquals(this.tags, other.tags)) return false;
     return true;
   }
-  
+
   @Override
   public int hashCode() {
     final int PRIME = 59;
@@ -248,19 +247,19 @@ public class EqualsAndHashCodeExample {
     result = (result*PRIME) + Arrays.deepHashCode(this.tags);
     return result;
   }
-  
+
   protected boolean canEqual(Object other) {
     return other instanceof EqualsAndHashCodeExample;
   }
-  
+
   public static class Square extends Shape {
     private final int width, height;
-    
+
     public Square(int width, int height) {
       this.width = width;
       this.height = height;
     }
-    
+
     @Override
     public boolean equals(Object o) {
       if (o == this) return true;
@@ -272,7 +271,7 @@ public class EqualsAndHashCodeExample {
       if (this.height != other.height) return false;
       return true;
     }
-    
+
     @Override
     public int hashCode() {
       final int PRIME = 59;
@@ -282,7 +281,7 @@ public class EqualsAndHashCodeExample {
       result = (result*PRIME) + this.height;
       return result;
     }
-    
+
     protected boolean canEqual(Object other) {
       return other instanceof Square;
     }
@@ -322,7 +321,7 @@ public class ConstructorExample<T> {
   private int x, y;
   @NonNull
   private T description;
-  
+
   @NoArgsConstructor
   public static class NoArgsExample {
     @NonNull
@@ -338,16 +337,16 @@ public class ConstructorExample<T> {
   private int x, y;
   @NonNull
   private T description;
-  
+
   private ConstructorExample(T description) {
     if (description == null) throw new NullPointerException("description");
     this.description = description;
   }
-  
+
   public static <T> ConstructorExample<T> of(T description) {
     return new ConstructorExample<T>(description);
   }
-  
+
   @java.beans.ConstructorProperties({"x", "y", "description"})
   protected ConstructorExample(int x, int y, T description) {
     if (description == null) throw new NullPointerException("description");
@@ -355,11 +354,11 @@ public class ConstructorExample<T> {
     this.y = y;
     this.description = description;
   }
-  
+
   public static class NoArgsExample {
     @NonNull
     private String field;
-    
+
     public NoArgsExample() {
     }
   }
@@ -373,12 +372,11 @@ public class ConstructorExample<T> {
 作用于字段，方法，参数，局部变量等。
 
 ```java
-
 import lombok.NonNull;
 
 public class NonNullExample extends Something {
   private String name;
-  
+
   public NonNullExample(@NonNull Person person) {
     super("Hello");
     this.name = person.getName();
@@ -393,7 +391,7 @@ import lombok.NonNull;
 
 public class NonNullExample extends Something {
   private String name;
-  
+
   public NonNullExample(@NonNull Person person) {
     super("Hello");
     if (person == null) {
@@ -421,7 +419,7 @@ public class DataExample {
   private int age;
   private double score;
   private String[] tags;
-  
+
   @ToString(includeFieldNames=true)
   @Data(staticConstructor="of")
   public static class Exercise<T> {
@@ -441,48 +439,48 @@ public class DataExample {
   private int age;
   private double score;
   private String[] tags;
-  
+
   public DataExample(String name) {
     this.name = name;
   }
-  
+
   public String getName() {
     return this.name;
   }
-  
+
   void setAge(int age) {
     this.age = age;
   }
-  
+
   public int getAge() {
     return this.age;
   }
-  
+
   public void setScore(double score) {
     this.score = score;
   }
-  
+
   public double getScore() {
     return this.score;
   }
-  
+
   public String[] getTags() {
     return this.tags;
   }
-  
+
   public void setTags(String[] tags) {
     this.tags = tags;
   }
-  
+
   @Override
   public String toString() {
     return "DataExample(" + this.getName() + ", " + this.getAge() + ", " + this.getScore() + ", " + Arrays.deepToString(this.getTags()) + ")";
   }
-  
+
   protected boolean canEqual(Object other) {
     return other instanceof DataExample;
   }
-  
+
   @Override
   public boolean equals(Object o) {
     if (o == this) return true;
@@ -495,7 +493,7 @@ public class DataExample {
     if (!Arrays.deepEquals(this.getTags(), other.getTags())) return false;
     return true;
   }
-  
+
   @Override
   public int hashCode() {
     final int PRIME = 59;
@@ -507,37 +505,37 @@ public class DataExample {
     result = (result*PRIME) + Arrays.deepHashCode(this.getTags());
     return result;
   }
-  
+
   public static class Exercise<T> {
     private final String name;
     private final T value;
-    
+
     private Exercise(String name, T value) {
       this.name = name;
       this.value = value;
     }
-    
+
     public static <T> Exercise<T> of(String name, T value) {
       return new Exercise<T>(name, value);
     }
-    
+
     public String getName() {
       return this.name;
     }
-    
+
     public T getValue() {
       return this.value;
     }
-    
+
     @Override
     public String toString() {
       return "Exercise(name=" + this.getName() + ", value=" + this.getValue() + ")";
     }
-    
+
     protected boolean canEqual(Object other) {
       return other instanceof Exercise;
     }
-    
+
     @Override
     public boolean equals(Object o) {
       if (o == this) return true;
@@ -548,7 +546,7 @@ public class DataExample {
       if (this.getValue() == null ? other.getValue() != null : !this.getValue().equals(other.getValue())) return false;
       return true;
     }
-    
+
     @Override
     public int hashCode() {
       final int PRIME = 59;
@@ -604,56 +602,56 @@ public class BuilderExample {
   private String name;
   private int age;
   private Set<String> occupations;
-  
+
   BuilderExample(String name, int age, Set<String> occupations) {
     this.name = name;
     this.age = age;
     this.occupations = occupations;
   }
-  
+
   private static long $default$created() {
     return System.currentTimeMillis();
   }
-  
+
   public static BuilderExampleBuilder builder() {
     return new BuilderExampleBuilder();
   }
-  
+
   public static class BuilderExampleBuilder {
     private long created;
     private boolean created$set;
     private String name;
     private int age;
     private java.util.ArrayList<String> occupations;
-    
+
     BuilderExampleBuilder() {
     }
-    
+
     public BuilderExampleBuilder created(long created) {
       this.created = created;
       this.created$set = true;
       return this;
     }
-    
+
     public BuilderExampleBuilder name(String name) {
       this.name = name;
       return this;
     }
-    
+
     public BuilderExampleBuilder age(int age) {
       this.age = age;
       return this;
     }
-    
+
     public BuilderExampleBuilder occupation(String occupation) {
       if (this.occupations == null) {
         this.occupations = new java.util.ArrayList<String>();
       }
-      
+
       this.occupations.add(occupation);
       return this;
     }
-    
+
     public BuilderExampleBuilder occupations(Collection<? extends String> occupations) {
       if (this.occupations == null) {
         this.occupations = new java.util.ArrayList<String>();
@@ -662,12 +660,12 @@ public class BuilderExample {
       this.occupations.addAll(occupations);
       return this;
     }
-    
+
     public BuilderExampleBuilder clearOccupations() {
       if (this.occupations != null) {
         this.occupations.clear();
       }
-      
+
       return this;
     }
 
@@ -676,7 +674,7 @@ public class BuilderExample {
       Set<String> occupations = ...;
       return new BuilderExample(created$set ? created : BuilderExample.$default$created(), name, age, occupations);
     }
-    
+
     @java.lang.Override
     public String toString() {
       return "BuilderExample.BuilderExampleBuilder(created = " + this.created + ", name = " + this.name + ", age = " + this.age + ", occupations = " + this.occupations + ")";
@@ -704,7 +702,7 @@ public class ValueExample {
   int age;
   double score;
   protected String[] tags;
-  
+
   @ToString(includeFieldNames=true)
   @Value(staticConstructor="of")
   public static class Exercise<T> {
@@ -724,7 +722,7 @@ public final class ValueExample {
   private int age;
   private final double score;
   protected final String[] tags;
-  
+
   @java.beans.ConstructorProperties({"name", "age", "score", "tags"})
   public ValueExample(String name, int age, double score, String[] tags) {
     this.name = name;
@@ -732,23 +730,23 @@ public final class ValueExample {
     this.score = score;
     this.tags = tags;
   }
-  
+
   public String getName() {
     return this.name;
   }
-  
+
   public int getAge() {
     return this.age;
   }
-  
+
   public double getScore() {
     return this.score;
   }
-  
+
   public String[] getTags() {
     return this.tags;
   }
-  
+
   @java.lang.Override
   public boolean equals(Object o) {
     if (o == this) return true;
@@ -762,7 +760,7 @@ public final class ValueExample {
     if (!Arrays.deepEquals(this.getTags(), other.getTags())) return false;
     return true;
   }
-  
+
   @java.lang.Override
   public int hashCode() {
     final int PRIME = 59;
@@ -775,37 +773,37 @@ public final class ValueExample {
     result = result * PRIME + Arrays.deepHashCode(this.getTags());
     return result;
   }
-  
+
   @java.lang.Override
   public String toString() {
     return "ValueExample(name=" + getName() + ", age=" + getAge() + ", score=" + getScore() + ", tags=" + Arrays.deepToString(getTags()) + ")";
   }
-  
+
   ValueExample withAge(int age) {
     return this.age == age ? this : new ValueExample(name, age, score, tags);
   }
-  
+
   public static final class Exercise<T> {
     private final String name;
     private final T value;
-    
+
     private Exercise(String name, T value) {
       this.name = name;
       this.value = value;
     }
-    
+
     public static <T> Exercise<T> of(String name, T value) {
       return new Exercise<T>(name, value);
     }
-    
+
     public String getName() {
       return this.name;
     }
-    
+
     public T getValue() {
       return this.value;
     }
-    
+
     @java.lang.Override
     public boolean equals(Object o) {
       if (o == this) return true;
@@ -819,7 +817,7 @@ public final class ValueExample {
       if (this$value == null ? other$value != null : !this$value.equals(other$value)) return false;
       return true;
     }
-    
+
     @java.lang.Override
     public int hashCode() {
       final int PRIME = 59;
@@ -830,7 +828,7 @@ public final class ValueExample {
       result = result * PRIME + ($value == null ? 43 : $value.hashCode());
       return result;
     }
-    
+
     @java.lang.Override
     public String toString() {
       return "ValueExample.Exercise(name=" + getName() + ", value=" + getValue() + ")";
@@ -848,17 +846,17 @@ import lombok.Synchronized;
 
 public class SynchronizedExample {
   private final Object readLock = new Object();
-  
+
   @Synchronized
   public static void hello() {
     System.out.println("world");
   }
-  
+
   @Synchronized
   public int answerToLife() {
     return 42;
   }
-  
+
   @Synchronized("readLock")
   public void foo() {
     System.out.println("bar");
@@ -873,19 +871,19 @@ public class SynchronizedExample {
   private static final Object $LOCK = new Object[0];
   private final Object $lock = new Object[0];
   private final Object readLock = new Object();
-  
+
   public static void hello() {
     synchronized($LOCK) {
       System.out.println("world");
     }
   }
-  
+
   public int answerToLife() {
     synchronized($lock) {
       return 42;
     }
   }
-  
+
   public void foo() {
     synchronized(readLock) {
       System.out.println("bar");
@@ -897,5 +895,246 @@ public class SynchronizedExample {
 ## 10. @Cleanup
 
 作用于局部变量，自动清理资源。比如文件流关闭时调用Close()。
+
+```java
+import lombok.Cleanup;
+import java.io.*;
+
+public class CleanupExample {
+  public static void main(String[] args) throws IOException {
+    @Cleanup
+    InputStream in = new FileInputStream(args[0]);
+    @Cleanup
+    OutputStream out = new FileOutputStream(args[1]);
+    byte[] b = new byte[10000];
+    while (true) {
+      int r = in.read(b);
+      if (r == -1) break;
+      out.write(b, 0, r);
+    }
+  }
+}
+```
+
+生成的代码：
+
+```java
+import java.io.*;
+
+public class CleanupExample {
+  public static void main(String[] args) throws IOException {
+    InputStream in = new FileInputStream(args[0]);
+    try {
+      OutputStream out = new FileOutputStream(args[1]);
+      try {
+        byte[] b = new byte[10000];
+        while (true) {
+          int r = in.read(b);
+          if (r == -1) break;
+          out.write(b, 0, r);
+        }
+      } finally {
+        if (out != null) {
+          out.close();
+        }
+      }
+    } finally {
+      if (in != null) {
+        in.close();
+      }
+    }
+  }
+}
+```
+
+## 11. @SneakyThrows
+
+作用于方法和构造器，用于抛出指定的异常，无需手动捕获异常，然后抛出。
+
+```java
+import lombok.SneakyThrows;
+
+public class SneakyThrowsExample implements Runnable {
+  @SneakyThrows(UnsupportedEncodingException.class)
+  public String utf8ToString(byte[] bytes) {
+    return new String(bytes, "UTF-8");
+  }
+  
+  @SneakyThrows
+  public void run() {
+    throw new Throwable();
+  }
+}
+```
+
+生产的代码：
+
+```java
+import lombok.Lombok;
+
+public class SneakyThrowsExample implements Runnable {
+  public String utf8ToString(byte[] bytes) {
+    try {
+      return new String(bytes, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      throw Lombok.sneakyThrow(e);
+    }
+  }
+  
+  public void run() {
+    try {
+      throw new Throwable();
+    } catch (Throwable t) {
+      throw Lombok.sneakyThrow(t);
+    }
+  }
+}
+```
+
+## 12. @Log
+
+作用于类上，用于生成日志，需要导入相关的依赖库。
+
+- @CommonsLog
+  private static final org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(LogExample.class);
+
+- @Flogger
+  private static final com.google.common.flogger.FluentLogger log = com.google.common.flogger.FluentLogger.forEnclosingClass();
+
+- @JBossLog
+  private static final org.jboss.logging.Logger log = org.jboss.logging.Logger.getLogger(LogExample.class);
+
+- @Log
+  private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(LogExample.class.getName());
+
+- @Log4j
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(LogExample.class);
+
+- @Log4j2
+  private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(LogExample.class);
+
+- @Slf4j
+  private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LogExample.class);
+
+- @XSlf4j
+  private static final org.slf4j.ext.XLogger log = org.slf4j.ext.XLoggerFactory.getXLogger(LogExample.class);
+
+- @CustomLog
+  private static final com.foo.your.Logger log = com.foo.your.LoggerFactory.createYourLogger(LogExample.class);
+
+```java
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
+
+@Log
+public class LogExample {
+  
+  public static void main(String... args) {
+    log.severe("Something's wrong here");
+  }
+}
+
+@Slf4j
+public class LogExampleOther {
+  
+  public static void main(String... args) {
+    log.error("Something else is wrong here");
+  }
+}
+
+@CommonsLog(topic="CounterLog")
+public class LogExampleCategory {
+
+  public static void main(String... args) {
+    log.error("Calling the 'CounterLog' with a message");
+  }
+}
+```
+
+生成的代码：
+
+```java
+public class LogExample {
+  private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(LogExample.class.getName());
+  
+  public static void main(String... args) {
+    log.severe("Something's wrong here");
+  }
+}
+
+public class LogExampleOther {
+  private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LogExampleOther.class);
+  
+  public static void main(String... args) {
+    log.error("Something else is wrong here");
+  }
+}
+
+public class LogExampleCategory {
+  private static final org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog("CounterLog");
+
+  public static void main(String... args) {
+    log.error("Calling the 'CounterLog' with a message");
+  }
+}
+```
+
+## 13. @Val
+
+作用于局部变量声明的类型。声明的局部变量类型为final。
+
+```java
+import java.util.ArrayList;
+import java.util.HashMap;
+import lombok.val;
+
+public class ValExample {
+  public String example() {
+    val example = new ArrayList<String>();
+    example.add("Hello, World!");
+    val foo = example.get(0);
+    return foo.toLowerCase();
+  }
+  
+  public void example2() {
+    val map = new HashMap<Integer, String>();
+    map.put(0, "zero");
+    map.put(5, "five");
+    for (val entry : map.entrySet()) {
+      System.out.printf("%d: %s\n", entry.getKey(), entry.getValue());
+    }
+  }
+}
+```
+
+生成的代码：
+
+```java
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class ValExample {
+  public String example() {
+    final ArrayList<String> example = new ArrayList<String>();
+    example.add("Hello, World!");
+    final String foo = example.get(0);
+    return foo.toLowerCase();
+  }
+  
+  public void example2() {
+    final HashMap<Integer, String> map = new HashMap<Integer, String>();
+    map.put(0, "zero");
+    map.put(5, "five");
+    for (final Map.Entry<Integer, String> entry : map.entrySet()) {
+      System.out.printf("%d: %s\n", entry.getKey(), entry.getValue());
+    }
+  }
+}
+```
+
+## 14. @Var
+
+var与val类似，只是局部变量不是final。在JDK 9中已经集成了该语法。
 
 
